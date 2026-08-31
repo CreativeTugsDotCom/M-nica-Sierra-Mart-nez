@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mónica Sierra Martínez | Psychologist & Psychotherapist</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ivory: '#FBF9F5',
+                        sand: '#EFECE6',
+                        terracotta: '#C86D51',
+                        clay: '#A95C42',
+                        olive: '#657153',
+                        charcoal: '#222222',
+                        warmbrown: '#5D4A42',
+                        softsand: '#F7F5F0'
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FBF9F5;
+            color: #222222;
+        }
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body class="bg-ivory text-charcoal antialiased selection:bg-sand selection:text-charcoal">
+
+    <!-- Notification Modal -->
+    <div id="notification-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-ivory border border-sand p-8 max-w-md w-full mx-4 shadow-2xl rounded-none relative transform scale-95 transition-transform duration-300" id="modal-content">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-charcoal/60 hover:text-charcoal transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div id="modal-body" class="text-center">
+                <div class="w-12 h-12 bg-sand mx-auto flex items-center justify-center mb-4 rounded-full text-clay">
+                    <i data-lucide="calendar" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-2xl font-serif font-medium mb-2">Book a Consultation</h3>
+                <p class="text-charcoal/70 text-sm mb-6 leading-relaxed">
+                    Thank you for your interest. Please complete the inquiry form at the bottom of the page or reach out directly to coordinate your initial consultation.
+                </p>
+                <button onclick="closeModal()" class="w-full bg-charcoal text-ivory py-3 px-6 text-sm tracking-wider uppercase hover:bg-clay transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-ivory/90 backdrop-blur-md border-b border-sand/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-24 flex items-center justify-between">
+            <a href="#home" class="group">
+                <span class="font-serif text-lg tracking-wide block font-medium group-hover:text-clay transition-colors">Mónica Sierra Martínez</span>
+                <span class="text-xs uppercase tracking-widest text-charcoal/60 block font-sans">Psychologist & Psychotherapist</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium tracking-wide">
+                <a href="#about" class="text-charcoal/80 hover:text-charcoal transition-colors">About</a>
+                <a href="#approach" class="text-charcoal/80 hover:text-charcoal transition-colors">Approach</a>
+                <a href="#who-i-work-with" class="text-charcoal/80 hover:text-charcoal transition-colors">Who I Work With</a>
+                <a href="#training" class="text-charcoal/80 hover:text-charcoal transition-colors">Training</a>
+                <a href="#contact" class="text-charcoal/80 hover:text-charcoal transition-colors">Contact</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center space-x-6">
+                <button onclick="openModal()" class="border border-charcoal/20 px-6 py-2.5 text-xs uppercase tracking-widest hover:bg-charcoal hover:text-ivory transition-all duration-300">
+                    Book a Consultation
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-charcoal focus:outline-none p-2">
+                <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="lg:hidden absolute top-full left-0 right-0 bg-ivory border-b border-sand shadow-lg hidden flex-col py-6 px-8 space-y-4">
+            <a href="#about" onclick="toggleMobileMenu()" class="text-lg font-serif">About</a>
+            <a href="#approach" onclick="toggleMobileMenu()" class="text-lg font-serif">Approach</a>
+            <a href="#who-i-work-with" onclick="toggleMobileMenu()" class="text-lg font-serif">Who I Work With</a>
+            <a href="#training" onclick="toggleMobileMenu()" class="text-lg font-serif">Training</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="text-lg font-serif">Contact</a>
+            <div class="pt-4 border-t border-sand">
+                <button onclick="openModal(); toggleMobileMenu();" class="w-full bg-charcoal text-ivory py-3 text-xs uppercase tracking-widest">
+                    Book a Consultation
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen pt-32 lg:pt-40 pb-20 flex items-center overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div class="lg:col-span-6 space-y-8 z-10">
+                <div class="inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-clay font-medium bg-sand/80 px-3 py-1">
+                    <span>Oaxaca, Mexico</span>
+                    <span>·</span>
+                    <span>Private Practice</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal leading-[1.15] text-charcoal">
+                    “A deeper understanding of yourself begins with understanding your story.”
+                </h1>
+                <p class="text-lg text-charcoal/80 font-light leading-relaxed max-w-xl">
+                    Psychotherapy grounded in systemic and transgenerational perspectives, supporting individuals, couples, and families through meaningful processes of change and healing.
+                </p>
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-2">
+                    <button onclick="openModal()" class="bg-charcoal text-ivry text-ivory py-4 px-8 text-xs uppercase tracking-widest hover:bg-clay transition-all text-center">
+                        Book a Consultation
+                    </button>
+                    <a href="#approach" class="border border-charcoal/20 py-4 px-8 text-xs uppercase tracking-widest hover:border-charcoal transition-all text-center">
+                        Explore My Approach
+                    </a>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-6 relative">
+                <div class="relative w-full aspect-[4/5] overflow-hidden shadow-2xl">
+                    <img src="https://www.pexels.com/photo/scenic-mountain-view-in-oaxaca-mexico-33234866/" alt="Scenic mountain view in Oaxaca, Mexico" class="w-full h-full object-cover filter brightness-[0.95] contrast-[1.05]" onerror="this.src='https://images.pexels.com/photos/33234866/pexels-photo-33234866.jpeg'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                </div>
+                <div class="absolute -bottom-6 -left-6 bg-ivory border border-sand p-6 hidden sm:block shadow-lg max-w-xs">
+                    <p class="font-serif italic text-sm text-charcoal/80">
+                        “Bringing relational healing, systemic vision, and professional presence to every session.”
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Mónica -->
+    <section id="about" class="py-24 lg:py-32 bg-softsand border-t border-sand">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+                <div class="lg:col-span-5 flex justify-center">
+                    <!-- Professional Portrait with Editorial Treatment -->
+                    <div class="relative max-w-sm w-full">
+                        <!-- Subtle organic decorative background shape -->
+                        <div class="absolute -inset-4 bg-sand/80 rounded-2xl transform -rotate-2 -z-0"></div>
+                        
+                        <div class="relative z-10 aspect-[3/4] overflow-hidden rounded-xl shadow-xl border border-sand bg-ivory">
+                            <img src="https://raw.githubusercontent.com/CreativeTugsDotCom/.mn/refs/heads/main/736087822_27856333280638155_4464499116059547099_n.jpg" alt="Mónica Sierra Martínez" class="w-full h-full object-cover object-top filter contrast-[1.03] brightness-[1.02]" onerror="this.src='https://images.pexels.com/photos/7579302/pexels-photo-7579302.jpeg'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
+                        </div>
+                        
+                        <!-- Caption badge -->
+                        <div class="absolute -bottom-6 right-4 bg-ivory border border-sand px-5 py-3 shadow-md z-20 hidden sm:block">
+                            <span class="block font-serif text-sm font-medium">Mónica Sierra Martínez</span>
+                            <span class="text-[10px] uppercase tracking-widest text-charcoal/60">Psychologist & Psychotherapist</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="text-xs uppercase tracking-widest text-clay font-medium block">About Mónica</span>
+                    <h2 class="text-3xl sm:text-4xl font-serif font-normal leading-snug">
+                        “Understanding the person within the story.”
+                    </h2>
+                    <div class="space-y-4 text-charcoal/80 font-light leading-relaxed">
+                        <p>
+                            As an Oaxacan psychologist and psychotherapist, my practice is rooted in the belief that our emotional lives are deeply shaped not only by individual experiences, but also by the intricate web of relationships, family dynamics, personal history, and the wider systems around us.
+                        </p>
+                        <p>
+                            Therapy is a collaborative sanctuary—a space to slow down, examine recurring patterns, and gently untangle what feels heavy. Whether you are navigating a personal life transition, relationship strain, or deep-seated family dynamics, my commitment is to offer a thoughtful, rigorous, and compassionate container for your healing process.
+                        </p>
+                        <p>
+                            Grounded in professional expertise and profound respect for human dignity, I work alongside individuals, couples, and families to foster reconciliation, clarity, and sustainable personal transformation.
+                        </p>
+                    </div>
+                    <div class="pt-4 flex items-center space-x-6">
+                        <div>
+                            <span class="block font-serif text-2xl font-medium">Oaxaca</span>
+                            <span class="text-xs uppercase tracking-widest text-charcoal/60">Based Practice</span>
+                        </div>
+                        <div class="h-10 w-px bg-charcoal/15"></div>
+                        <div>
+                            <span class="block font-serif text-2xl font-medium">English & Spanish</span>
+                            <span class="text-xs uppercase tracking-widest text-charcoal/60">Professional Fluent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approach Section -->
+    <section id="approach" class="py-24 lg:py-32 bg-ivory border-t border-sand">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="max-w-3xl mb-16 space-y-4">
+                <span class="text-xs uppercase tracking-widest text-clay font-medium block">Therapeutic Framework</span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-normal leading-tight">
+                    “A systemic and transgenerational perspective.”
+                </h2>
+                <p class="text-charcoal/80 font-light text-lg">
+                    Human emotional experience cannot be fully understood in isolation. Our work explores the relational frameworks and generational histories that inform how we love, struggle, and grow.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-16">
+                <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-softsand p-8 border border-sand/80 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-clay font-medium mb-3 block">01</span>
+                            <h3 class="text-xl font-serif mb-3">Systemic Perspective</h3>
+                            <p class="text-sm text-charcoal/70 font-light leading-relaxed">
+                                Understanding people within the relationships, environments, and contexts that shape their daily lives and emotional realities.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-softsand p-8 border border-sand/80 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-clay font-medium mb-3 block">02</span>
+                            <h3 class="text-xl font-serif mb-3">Transgenerational Perspective</h3>
+                            <p class="text-sm text-charcoal/70 font-light leading-relaxed">
+                                Exploring how family histories, inherited patterns, and ancestral experiences may influence the ways we relate and respond today.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-softsand p-8 border border-sand/80 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-clay font-medium mb-3 block">03</span>
+                            <h3 class="text-xl font-serif mb-3">Emotionally Focused Therapy</h3>
+                            <p class="text-sm text-charcoal/70 font-light leading-relaxed">
+                                Creating safe therapeutic space to examine core emotional experiences and reshape the patterns that govern vital relationships.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-softsand p-8 border border-sand/80 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-clay font-medium mb-3 block">04</span>
+                            <h3 class="text-xl font-serif mb-3">Trauma-Informed Systemic Work</h3>
+                            <p class="text-sm text-charcoal/70 font-light leading-relaxed">
+                                Approaching trauma with delicate attention to both individual nervous system responses and surrounding relational structures.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="aspect-[4/5] relative overflow-hidden shadow-xl border border-sand">
+                        <img src="https://www.pexels.com/photo/woman-in-a-psychotherapy-session-with-a-psychologist-7579302/" alt="Psychotherapy session dialogue and listening" class="w-full h-full object-cover filter contrast-[1.02]" onerror="this.src='https://images.pexels.com/photos/7579302/pexels-photo-7579302.jpeg'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 text-ivory">
+                            <p class="font-serif italic text-base">“Listening with presence, dialogue, and deep human trust.”</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who I Work With -->
+    <section id="who-i-work-with" class="py-24 lg:py-32 bg-softsand border-t border-sand">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <span class="text-xs uppercase tracking-widest text-clay font-medium block">Formats of Care</span>
+                <h2 class="text-3xl sm:text-4xl font-serif font-normal">
+                    “Who I Work With”
+                </h2>
+                <p class="text-charcoal/80 font-light">
+                    Tailored therapeutic containers designed for individuals, couples, and family networks navigating complex emotional terrain.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Individuals Card -->
+                <div class="bg-ivory border border-sand flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1 shadow-sm overflow-hidden">
+                    <div>
+                        <div class="relative w-full aspect-[16/10] overflow-hidden bg-sand/50">
+                            <img src="https://www.pexels.com/photo/woman-talking-to-a-psychologist-8560218/" alt="Woman talking to a psychologist in individual therapy" class="w-full h-full object-cover filter contrast-[1.03]" onerror="this.src='https://images.pexels.com/photos/8560218/pexels-photo-8560218.jpeg'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent"></div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-serif mb-4">Individuals</h3>
+                            <p class="text-charcoal/70 font-light leading-relaxed text-sm mb-6">
+                                “A space to explore personal experiences, emotional patterns, relationships, transitions, and meaningful change.”
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8 pt-0">
+                        <button onclick="openModal()" class="text-xs uppercase tracking-widest font-medium text-clay flex items-center space-x-2 group">
+                            <span>Explore Individual Work</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Couples Card -->
+                <div class="bg-ivory border border-sand flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1 shadow-sm overflow-hidden">
+                    <div>
+                        <div class="relative w-full aspect-[16/10] overflow-hidden bg-sand/50">
+                            <img src="https://www.pexels.com/photo/couple-talking-with-therapist-3958383/" alt="Couple talking with a therapist in couples therapy session" class="w-full h-full object-cover filter contrast-[1.03]" onerror="this.src='https://images.pexels.com/photos/3958383/pexels-photo-3958383.jpeg'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent"></div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-serif mb-4">Couples</h3>
+                            <p class="text-charcoal/70 font-light leading-relaxed text-sm mb-6">
+                                “Support for understanding relational patterns, emotional needs, communication, and the dynamics that shape connection.”
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8 pt-0">
+                        <button onclick="openModal()" class="text-xs uppercase tracking-widest font-medium text-clay flex items-center space-x-2 group">
+                            <span>Explore Couples Work</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Families Card -->
+                <div class="bg-ivory border border-sand flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1 shadow-sm overflow-hidden">
+                    <div>
+                        <div class="relative w-full aspect-[16/10] overflow-hidden bg-sand/50">
+                            <img src="https://www.pexels.com/photo/photo-of-a-family-doing-a-therapy-session-7447261/" alt="Family doing a therapy session" class="w-full h-full object-cover filter contrast-[1.03]" onerror="this.src='https://images.pexels.com/photos/7447261/pexels-photo-7447261.jpeg'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent"></div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-serif mb-4">Families</h3>
+                            <p class="text-charcoal/70 font-light leading-relaxed text-sm mb-6">
+                                “A space to understand family relationships, recurring patterns, communication, and opportunities for meaningful change.”
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8 pt-0">
+                        <button onclick="openModal()" class="text-xs uppercase tracking-widest font-medium text-clay flex items-center space-x-2 group">
+                            <span>Explore Family Work</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#approach" class="inline-flex items-center space-x-2 text-xs uppercase tracking-widest border-b border-charcoal/40 pb-1 hover:border-charcoal transition-colors">
+                    <span>Explore the Approach</span>
+                    <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training & Professional Foundation -->
+    <section id="training" class="py-24 lg:py-32 bg-ivory border-t border-sand">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-5 space-y-4">
+                    <span class="text-xs uppercase tracking-widest text-clay font-medium block">Credentials & Background</span>
+                    <h2 class="text-3xl sm:text-4xl font-serif font-normal leading-snug">
+                        “Professional training grounded in relational work.”
+                    </h2>
+                    <p class="text-charcoal/80 font-light leading-relaxed">
+                        Rigorous academic foundation paired with continuous advanced specializations in systemic psychotherapy and trauma-informed methodologies.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="border-b border-sand pb-6">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="text-xl font-serif font-medium">Family & Couples Therapy</h3>
+                            <span class="text-xs uppercase tracking-widest text-clay">Advanced Training</span>
+                        </div>
+                        <p class="text-sm text-charcoal/70 font-light">
+                            Specialized clinical education focused on relational systems, structural assessment, and marital intervention methodologies.
+                        </p>
+                    </div>
+
+                    <div class="border-b border-sand pb-6">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="text-xl font-serif font-medium">Family Constellations</h3>
+                            <span class="text-xs uppercase tracking-widest text-clay">Systemic Practice</span>
+                        </div>
+                        <p class="text-sm text-charcoal/70 font-light">
+                            Phenomenological approach to uncovering unconscious transgenerational entanglements and restoring order within family systems.
+                        </p>
+                    </div>
+
+                    <div class="border-b border-sand pb-6">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="text-xl font-serif font-medium">Emotionally Focused Therapy (EFT)</h3>
+                            <span class="text-xs uppercase tracking-widest text-clay">Attachment-Based</span>
+                        </div>
+                        <p class="text-sm text-charcoal/70 font-light">
+                            Evidence-based modality prioritizing emotional regulation, vulnerability, and secure attachment bonding in intimate relationships.
+                        </p>
+                    </div>
+
+                    <div class="pb-2">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="text-xl font-serif font-medium">Systemic Approaches to Trauma</h3>
+                            <span class="text-xs uppercase tracking-widest text-clay">Clinical Integration</span>
+                        </div>
+                        <p class="text-sm text-charcoal/70 font-light">
+                            Trauma-informed frameworks addressing both individual nervous system stabilization and the broader systemic holding environments.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy / Immersive Visual Break -->
+    <section class="relative py-32 lg:py-44 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://www.pexels.com/photo/hills-on-seashore-near-water-on-sunset-17002203/" alt="Oaxaca landscape sunset view" class="w-full h-full object-cover filter brightness-[0.7] contrast-[1.05]" onerror="this.src='https://images.pexels.com/photos/17002203/pexels-photo-17002203.jpeg'">
+            <div class="absolute inset-0 bg-black/40"></div>
+        </div>
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center text-ivory space-y-8">
+            <span class="text-xs uppercase tracking-widest text-ivory/80 font-medium tracking-[0.2em] block">Guiding Ethos</span>
+            <h2 class="text-3xl sm:text-5xl font-serif font-normal leading-tight">
+                “Toward peace, reconciliation, and life.”
+            </h2>
+            <p class="text-lg sm:text-xl font-light leading-relaxed max-w-2xl mx-auto text-ivory/90">
+                True healing is not merely the erasure of distress; it is the reclamation of vitality, self-understanding, and a reconciled relationship with one's personal history. My work combines professional rigor with a profound, human commitment to life and peace.
+            </p>
+        </div>
+    </section>
+
+    <!-- The Therapy Process -->
+    <section class="py-24 lg:py-32 bg-softsand border-t border-sand">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <span class="text-xs uppercase tracking-widest text-clay font-medium block">How We Begin</span>
+                <h2 class="text-3xl sm:text-4xl font-serif font-normal">
+                    “The Therapy Process”
+                </h2>
+                <p class="text-charcoal/80 font-light">
+                    A clear, supportive roadmap designed to welcome you into a safe space at your own pace.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-ivory p-8 border border-sand flex flex-col justify-between shadow-sm">
+                    <div>
+                        <span class="text-3xl font-serif text-clay block mb-4">01</span>
+                        <h3 class="text-xl font-serif mb-3">Begin the Conversation</h3>
+                        <p class="text-sm text-charcoal/70 font-light leading-relaxed">
+                            Take the first step and create space to talk about what you are currently experiencing, feeling, or questioning in your life.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-ivory p-8 border border-sand flex flex-col justify-between shadow-sm">
+                    <div>
+                        <span class="text-3xl font-serif text-clay block mb-4">02</span>
+                        <h3 class="text-xl font-serif mb-3">Understand Your Story</h3>
+                        <p class="text-sm text-charcoal/70 font-light leading-relaxed">
+                            Together, explore the experiences, relationships, and transgenerational patterns that may be shaping your present reality.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-ivory p-8 border border-sand flex flex-col justify-between shadow-sm">
+                    <div>
+                        <span class="text-3xl font-serif text-clay block mb-4">03</span>
+                        <h3 class="text-xl font-serif mb-3">Begin the Work</h3>
+                        <p class="text-sm text-charcoal/70 font-light leading-relaxed">
+                            Develop a sustained therapeutic process aligned directly with your personal needs, emotional pacing, and circumstances.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button onclick="openModal()" class="bg-charcoal text-ivory py-4 px-10 text-xs uppercase tracking-widest hover:bg-clay transition-colors">
+                    Book a Consultation
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 lg:py-32 bg-ivory border-t border-sand">
+        <div class="max-w-4xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-16 space-y-4">
+                <span class="text-xs uppercase tracking-widest text-clay font-medium block">Clarifications</span>
+                <h2 class="text-3xl sm:text-4xl font-serif font-normal">
+                    Frequently Asked Questions
+                </h2>
+            </div>
+
+            <div class="space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="border-b border-sand pb-6">
+                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center text-left py-2 focus:outline-none group">
+                        <span class="text-lg font-serif font-medium group-hover:text-clay transition-colors">How do I know if psychotherapy is right for me?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-charcoal/60 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden pt-4 text-sm text-charcoal/70 font-light leading-relaxed">
+                        Psychotherapy is valuable whenever you feel stuck in repeating emotional patterns, experience persistent relational difficulties, navigate major life transitions, or seek a deeper understanding of your internal world.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border-b border-sand pb-6">
+                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center text-left py-2 focus:outline-none group">
+                        <span class="text-lg font-serif font-medium group-hover:text-clay transition-colors">Do you work with individuals, couples, and families?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-charcoal/60 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden pt-4 text-sm text-charcoal/70 font-light leading-relaxed">
+                        Yes. Therapeutic containers are tailored specifically for individual adults, couples seeking relational repair, and family groups looking to resolve transgenerational or structural dynamics.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border-b border-sand pb-6">
+                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center text-left py-2 focus:outline-none group">
+                        <span class="text-lg font-serif font-medium group-hover:text-clay transition-colors">What can I expect from an initial consultation?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-charcoal/60 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden pt-4 text-sm text-charcoal/70 font-light leading-relaxed">
+                        The initial consultation provides a confidential space to discuss what brings you to therapy, explore your primary objectives, and determine the most appropriate therapeutic path moving forward.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="border-b border-sand pb-6">
+                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center text-left py-2 focus:outline-none group">
+                        <span class="text-lg font-serif font-medium group-hover:text-clay transition-colors">What does a systemic perspective mean in therapy?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-charcoal/60 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden pt-4 text-sm text-charcoal/70 font-light leading-relaxed">
+                        A systemic perspective looks beyond individual symptoms to understand how relational contexts, family structures, and environmental pressures influence your emotional and psychological well-being.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="border-b border-sand pb-6">
+                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center text-left py-2 focus:outline-none group">
+                        <span class="text-lg font-serif font-medium group-hover:text-clay transition-colors">What does a transgenerational perspective mean?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-charcoal/60 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden pt-4 text-sm text-charcoal/70 font-light leading-relaxed">
+                        It involves examining how family histories, inherited behavioral templates, and unresolved ancestral experiences may quietly shape current beliefs, relational patterns, and personal struggles.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="border-b border-sand pb-6">
+                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center text-left py-2 focus:outline-none group">
+                        <span class="text-lg font-serif font-medium group-hover:text-clay transition-colors">Are sessions available online or in person?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-charcoal/60 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden pt-4 text-sm text-charcoal/70 font-light leading-relaxed">
+                        Sessions are offered both in-person in Oaxaca, Mexico, and securely online for clients connecting from other locations.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-24 bg-softsand border-t border-sand">
+        <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-normal">
+                “There is a place to begin.”
+            </h2>
+            <p class="text-charcoal/80 font-light text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+                If you are navigating change, relationship difficulties, family patterns, or a personal transition, therapy can offer a space to pause, understand, and move forward.
+            </p>
+            <div class="pt-4">
+                <button onclick="openModal()" class="bg-charcoal text-ivory py-4 px-10 text-xs uppercase tracking-widest hover:bg-clay transition-colors">
+                    Book a Consultation
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 lg:py-32 bg-ivory border-t border-sand">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+                <div class="lg:col-span-5 space-y-8">
+                    <div class="space-y-4">
+                        <span class="text-xs uppercase tracking-widest text-clay font-medium block">Get in Touch</span>
+                        <h2 class="text-3xl sm:text-4xl font-serif font-normal">
+                            Contact & Practice Details
+                        </h2>
+                        <p class="text-charcoal/80 font-light leading-relaxed">
+                            Reach out to coordinate an initial consultation or inquire about clinical availability.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 text-sm text-charcoal/80">
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="mail" class="w-5 h-5 text-clay mt-0.5"></i>
+                            <div>
+                                <span class="block text-xs uppercase tracking-widest text-charcoal/50">Email</span>
+                                <span class="font-medium">contact@monicasierra.com</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="phone" class="w-5 h-5 text-clay mt-0.5"></i>
+                            <div>
+                                <span class="block text-xs uppercase tracking-widest text-charcoal/50">Phone / WhatsApp</span>
+                                <span class="font-medium">+52 (951) XXX XXXX</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-clay mt-0.5"></i>
+                            <div>
+                                <span class="block text-xs uppercase tracking-widest text-charcoal/50">Location</span>
+                                <span class="font-medium">Oaxaca, Mexico</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="globe" class="w-5 h-5 text-clay mt-0.5"></i>
+                            <div>
+                                <span class="block text-xs uppercase tracking-widest text-charcoal/50">Availability</span>
+                                <span class="font-medium">In-Person & Online Sessions Available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-softsand p-8 lg:p-12 border border-sand">
+                    <form onsubmit="handleFormSubmit(event)" class="space-y-6">
+                        <div class="space-y-2">
+                            <label class="block text-xs uppercase tracking-widest text-charcoal/70">Your Name</label>
+                            <input type="text" required class="w-full bg-ivory border border-sand px-4 py-3 text-sm focus:outline-none focus:border-clay transition-colors" placeholder="Full Name">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-xs uppercase tracking-widest text-charcoal/70">Email Address</label>
+                            <input type="email" required class="w-full bg-ivory border border-sand px-4 py-3 text-sm focus:outline-none focus:border-clay transition-colors" placeholder="your@email.com">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-xs uppercase tracking-widest text-charcoal/70">What would you like to talk about?</label>
+                            <textarea rows="4" required class="w-full bg-ivory border border-sand p-4 text-sm focus:outline-none focus:border-clay transition-colors" placeholder="Briefly share what brings you to therapy..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-charcoal text-ivory py-4 text-xs uppercase tracking-widest hover:bg-clay transition-colors">
+                            Send Inquiry
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-charcoal text-ivory py-16">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0">
+            <div class="text-center md:text-left">
+                <span class="font-serif text-lg tracking-wide block font-medium">Mónica Sierra Martínez</span>
+                <span class="text-xs uppercase tracking-widest text-ivory/60 block mt-1">Psychologist & Psychotherapist</span>
+            </div>
+
+            <div class="flex flex-wrap justify-center space-x-6 text-xs uppercase tracking-widest text-ivory/80">
+                <a href="#home" class="hover:text-ivory transition-colors">Home</a>
+                <a href="#about" class="hover:text-ivory transition-colors">About</a>
+                <a href="#approach" class="hover:text-ivory transition-colors">Approach</a>
+                <a href="#who-i-work-with" class="hover:text-ivory transition-colors">Who I Work With</a>
+                <a href="#training" class="hover:text-ivory transition-colors">Training</a>
+                <a href="#contact" class="hover:text-ivory transition-colors">Contact</a>
+            </div>
+
+            <div>
+                <button onclick="openModal()" class="border border-ivory/30 px-6 py-2.5 text-xs uppercase tracking-widest hover:bg-ivory hover:text-charcoal transition-all">
+                    Book a Consultation
+                </button>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 mt-12 pt-8 border-t border-ivory/10 text-center text-xs text-ivory/40">
+            &copy; 2026 Mónica Sierra Martínez. All rights reserved. Professional psychotherapy practice in Oaxaca, Mexico.
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Modal Functionality
+        const modal = document.getElementById('notification-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('flex');
+                icon.setAttribute('data-lucide', 'x');
+            } else {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex');
+                icon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        }
+
+        // FAQ Accordion
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            // Toggle current
+            const isHidden = content.classList.contains('hidden');
+            
+            // Close all
+            document.querySelectorAll('.faq-content').forEach(item => {
+                item.classList.add('hidden');
+            });
+            document.querySelectorAll('button[onclick="toggleFaq(this)"] i').forEach(item => {
+                item.style.transform = 'rotate(0deg)';
+                item.setAttribute('data-lucide', 'plus');
+            });
+
+            if (isHidden) {
+                content.classList.remove('hidden');
+                icon.setAttribute('data-lucide', 'minus');
+                icon.style.transform = 'rotate(180deg)';
+            }
+            lucide.createIcons();
+        }
+
+        // Form Submission Simulation
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const modalBody = document.getElementById('modal-body');
+            modalBody.innerHTML = `
+                <div class="w-12 h-12 bg-sand mx-auto flex items-center justify-center mb-4 rounded-full text-clay">
+                    <i data-lucide="check" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-2xl font-serif font-medium mb-2">Inquiry Received</h3>
+                <p class="text-charcoal/70 text-sm mb-6 leading-relaxed">
+                    Thank you for reaching out. Mónica Sierra Martínez will review your message and respond shortly.
+                </p>
+                <button onclick="closeModal()" class="w-full bg-charcoal text-ivory py-3 px-6 text-sm tracking-wider uppercase hover:bg-clay transition-colors">
+                    Close
+                </button>
+            `;
+            openModal();
+            event.target.reset();
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
